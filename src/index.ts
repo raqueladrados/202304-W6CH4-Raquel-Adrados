@@ -3,4 +3,8 @@ import http from 'http';
 import { program } from 'commander';
 import * as dotenv from 'dotenv';
 
-const PORT = 
+const PORT = process.env.PORT || 2000;
+const server = http.createServer((_request, response) => {
+  response.write('hola');
+});
+server.listen(PORT);
