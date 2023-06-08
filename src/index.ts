@@ -23,14 +23,30 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const { pathname } = url.parse(req.url);
+  const { pathname, query } = url.parse(req.url);
+
+  const params = query;
+
+  const addition = () => Number(a) + Number(b);
+  const rest = () => Number(a) - Number(b);
+  const div = () => Number(a) / Number(b);
+  const mult = () => Number(a) * Number(b);
 
   if (req.method !== 'GET') {
     server.emit('error', new Error('Invalid method'));
     return;
   }
 
-  res.write(`<h1>Hola ${pathname!.toUpperCase()}</h1>`);
+  if (pathname === '/calculator') {
+    server.emit('addition', 'rest', 'mult', 'div');
+    return;
+  }
+
+  if (pathname !== '/calculator') {
+    server.emit('error', new Error('Path not found'));
+    res.write(`<h1>ERROR 404</h1>`);
+    return;
+  }
   res.write(req.method);
   res.write(req.url);
   res.end();
