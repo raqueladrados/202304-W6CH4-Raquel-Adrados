@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start:new": "node --watch dist/index.js",
-    "server": "cross-env nodemon dist/index.js",
+    "server": "cross-env PORT=4000 nodemon dist/index.js",
     "server2": "nodemon dist/index.js",
     "build": "tsc --watch",
     "start": "concurrently \"npm:server\" \"npm:build\"",
